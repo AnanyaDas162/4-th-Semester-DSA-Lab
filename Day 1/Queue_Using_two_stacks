@@ -1,0 +1,95 @@
+#include <stdio.h>
+int top1 = -1, top2 = -1;
+int s1[30], s2[30];
+int n = 30, count = 0, cnt = 0;
+void display()
+{
+    if (top1 == -1)
+    {
+        printf("\n The Queue is Empty!!!");
+    }
+    else
+    {
+        printf("\n The queue is \n");
+          for (int i = 0; i <= top1; i++)
+       {
+            printf("\t %d", s1[i]);
+       }
+    }
+}
+int push(int s[30], int x, int top)
+{
+    if (top == n-1)
+    {
+        printf("\n Overflow!!");
+    }
+    else{
+        top ++;
+        s[top] = x;
+    }
+    return top;
+}
+int pop(int s[30], int top)
+{
+    if (top == -1)
+    {
+        printf("\n Underflow!!");
+    }
+    else
+    {
+        //printf("\n The element to be deleted is %d", s[top]);
+        top--;
+    }
+    return top;
+}
+void enque()
+{
+    int x;
+    printf("\n Enter the data :: ");
+    scanf("%d", &x);
+    count ++;
+    top1 = push(s1, x, top1);
+    display();
+}
+void deque()
+{
+    for (int i = top1; i >= 0; i--)
+    {
+        top2 = push(s2, s1[i], top2);
+    }
+    top2 = pop(s2,top2);
+    top1 = -1;
+    for (int i = top2; i >= 0; i --)
+    {
+        top1 = push(s1, s2[i], top1);
+    }
+    top2 = -1;
+    display();
+}
+int main()
+{
+    int choice = 1;
+    while(choice)
+    {
+        printf("\n Enter 1 for ENQUEUE ");
+        printf("\n Enter 2 for DEQUEUE ");
+        printf("\n Enter your choice: ");
+        scanf("%d", &choice);
+        if (choice == 1)
+        {
+            enque();
+        }
+        else if (choice == 2)
+        {
+            deque();
+        }
+        else if (choice == 0)
+        {
+            printf("\n The program is terminated");
+        }
+        else
+        {
+            printf("\n WRONG CHOICE");
+        }
+    }
+}
