@@ -1,0 +1,65 @@
+#include <bits/stdc++.h>
+#include <fstream>
+#define m 10
+using namespace std;
+int n;
+int graph[m][m], color[m], available[m];
+void input(){
+    int x;
+    ifstream in ("abc.txt");
+    in >> n;
+    for (int i = 0; i < n; i ++){
+        for (int j = 0; j < n; j ++){
+            in >> x;
+            graph[i][j] = x;
+        }
+    }
+}
+void print(){
+    for (int i = 0; i < n; i ++){
+        for (int j = 0; j < n; j ++){
+            cout << "\t" << graph[i][j];
+        }
+        cout << "\n";
+    }
+}
+void initialize(){
+    for (int i = 0; i < n; i ++){
+        color[i] = -1;
+        available [i] = true;
+    }
+}
+void graph_coloring(){
+    initialize();
+    color[0] = 0;// Giving the color 0 to the first vertex
+    for (int i = 1; i < n; i ++){// iterating from the vertex 2 to the n th vertex
+        for (int j = 0; j < n; j ++){
+            if (graph[i][j] > 0){//Finding the adjacents of i th vertex
+                if (color[j] != -1){// Checking whether the adjacent is assigned to any color or not
+                    available[color[j]] = false;// If so then making the color unavailable for the i th vertex
+                }
+            }
+        }
+        for (int k = 0; k < n; k ++){
+            if (available[k]){// iterating the available array
+                color[i] = k;// Assigning the lowest color available to the i th vertex
+                break;
+            }
+        }
+        for (int u = 0; u < n; u ++){
+            available[u] = true;// Making the all color availavle for the new vertex
+        }
+    }
+    cout << "The corresponding colors will be -->" << endl;
+    for (int i = 0; i < n; i ++){
+        cout << char(i+65) << "-->" << color[i] << endl;
+    }
+}
+int main(){
+    input();
+    cout << "The graph is :: " << endl;
+    print();
+    graph_coloring();
+    cout << "The chromatic number is" << " :: " << *max_element(color, color + n)+1 << endl;
+    return 0;
+}
