@@ -95,7 +95,7 @@ void input(char str[m]){
     print_edges ();
 }
 int main(){
-    char str[m] = "negative-edge-graph-without-any-cycle.txt";
+    char str[m] = "negative-edge-graph.txt";
     char s[m] = "abc.txt";
     char st[m] = "negative-edge-cycle.txt";
     input(str);
