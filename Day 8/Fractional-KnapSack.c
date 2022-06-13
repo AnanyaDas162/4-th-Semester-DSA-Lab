@@ -46,7 +46,7 @@ int hoare_partition (int low, int high)
 {
     int i = low;
     int j = high + 1;
-    int pivot = arr[low].p_w;
+    float pivot = arr[low].p_w;
     while (i < j)
     {
         do
